@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "my-sheet-4954f": {
+      "hosting": {
+        "app": [
+          "my-sheet-4954f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "my-sheet-4954f"
+  }
+}

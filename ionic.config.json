@@ -1,0 +1,7 @@
+{
+  "name": "My Sheet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
