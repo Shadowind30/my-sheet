@@ -7,9 +7,25 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ul>
+  <!-- <ul>
     <li *ngFor="let item of item$ | async">
-      {{ item.name }}
+      {{ item.name }} {{item.amount}}
     </li>
-  </ul>
+  </ul> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          Diciembre
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngFor="let column of columns">
+        <app-column [data]="column"></app-column>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
