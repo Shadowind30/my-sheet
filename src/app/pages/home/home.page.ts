@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { IColumn } from '../models/main.interfaces';
-import { getDaysInAMonth } from '../utils/function.helpers';
+import { IColumn } from '../../models/main.interfaces';
 
 @Component({
   selector: 'app-home',
@@ -44,8 +43,9 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    //const collectionRef = collection(this.firestore, 'users');
-    //this.item$ = collectionData(collectionRef);
+    const collectionRef = collection(this.firestore, 'users');
+    this.item$ = collectionData(collectionRef);
+    console.log('abs');
   }
 
 }

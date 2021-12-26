@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor() {
+    console.log(6666666666666666666666);
+  }
 
 }
