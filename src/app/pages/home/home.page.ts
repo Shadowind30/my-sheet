@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { IColumn } from '../../models/main.interfaces';
+import { getDaysInAMonth } from 'src/app/utils/function.helpers';
 
 @Component({
   selector: 'app-home',
@@ -15,27 +16,32 @@ export class HomePage implements OnInit {
     {
       name: 'Dia',
       editable: false,
-      size: 2
+      size: 1,
+      content: new Array(getDaysInAMonth()).fill(0).map((_, i) => (i + 1).toString().padStart(2, '0'))
     },
     {
       name: 'Venta',
       editable: true,
-      size: 2
+      size: 2,
+      content: []
     },
     {
       name: 'Desembolso',
       editable: true,
-      size: 4
+      size: 4,
+      content: []
     },
     {
       name: 'Gastos',
       editable: true,
-      size: 2
+      size: 2,
+      content: []
     },
     {
       name: 'Caja',
       editable: true,
-      size: 2
+      size: 2,
+      content: []
     }
   ];
 
@@ -45,7 +51,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     const collectionRef = collection(this.firestore, 'users');
     this.item$ = collectionData(collectionRef);
-    console.log('abs');
+    console.log(getDaysInAMonth(2, 2020));
   }
 
 }

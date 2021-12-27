@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-balance',
+  templateUrl: 'balance.page.html',
+  styleUrls: ['balance.page.scss']
 })
-export class Tab2Page {
+export class BalancePage {
 
   constructor() {
     console.log(6666666666666666666666);
