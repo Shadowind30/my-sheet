@@ -7,23 +7,34 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ul>
-    <li *ngFor="let item of item$ | async">
-      {{ item.name }} {{item.amount}}
-    </li>
-  </ul> -->
-
   <ion-grid>
     <ion-row>
       <ion-col>
         <ion-item>
-          Diciembre
+          Martes 28 de Diciembre
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col *ngFor="let column of columns">
-        <app-column [data]="column"></app-column>
+    <ion-row class="ion-justify-content-between">
+      <ion-col>Hora</ion-col>
+      <ion-col>Monto</ion-col>
+      <ion-col>Concepto</ion-col> 
+    </ion-row>
+    <ion-row class="ion-justify-content-between" *ngFor="let column of columns">
+      <ion-col>
+        <ion-text>
+          {{column.time}}
+        </ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text>
+          {{column.amount}}
+        </ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text>
+          {{mapConcept(column.concept)}}
+        </ion-text>
       </ion-col>
     </ion-row>
   </ion-grid>

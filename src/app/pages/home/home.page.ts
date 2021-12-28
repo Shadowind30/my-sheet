@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { IColumn } from '../../models/main.interfaces';
-import { getDaysInAMonth } from 'src/app/utils/function.helpers';
+import { getDaysInAMonth, mapConcept } from 'src/app/utils/function.helpers';
+import { IRow } from 'src/app/models/main.interfaces';
 
 @Component({
   selector: 'app-home',
@@ -11,37 +11,29 @@ import { getDaysInAMonth } from 'src/app/utils/function.helpers';
 })
 export class HomePage implements OnInit {
 
+  public mapConcept = mapConcept;
   public item$: Observable<any[]>;
-  public columns: IColumn[] = [
+  public header: any = {
+    time: 'Hora',
+    amount: 'Monto',
+    concept: 'Concepto'
+  };
+
+  public columns: IRow[] = [
     {
-      name: 'Dia',
-      editable: false,
-      size: 1,
-      content: new Array(getDaysInAMonth()).fill(0).map((_, i) => (i + 1).toString().padStart(2, '0'))
+      time: '10:00',
+      amount: 100,
+      concept: 'sale'
     },
     {
-      name: 'Venta',
-      editable: true,
-      size: 2,
-      content: []
+      time: '10:05',
+      amount: 200,
+      concept: 'sale'
     },
     {
-      name: 'Desembolso',
-      editable: true,
-      size: 4,
-      content: []
-    },
-    {
-      name: 'Gastos',
-      editable: true,
-      size: 2,
-      content: []
-    },
-    {
-      name: 'Caja',
-      editable: true,
-      size: 2,
-      content: []
+      time: '10:10',
+      amount: 300,
+      concept: 'expense'
     }
   ];
 

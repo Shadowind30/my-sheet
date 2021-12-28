@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { getDaysInAMonth } from 'src/app/utils/function.helpers';
 
 @Component({
   selector: 'app-balance',
@@ -8,7 +9,6 @@ import { Component } from '@angular/core';
 export class BalancePage {
 
   constructor() {
-    console.log(6666666666666666666666);
   }
 
 }

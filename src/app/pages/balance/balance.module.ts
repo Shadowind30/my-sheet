@@ -6,13 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { BalancePage } from './balance.page';
 
 import { BalancePageRoutingModule } from './balance-routing.module';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    BalancePageRoutingModule
+    BalancePageRoutingModule,
+    ComponentsModule
   ],
   declarations: [BalancePage]
 })

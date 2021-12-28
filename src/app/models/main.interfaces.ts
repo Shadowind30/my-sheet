@@ -1,15 +1,16 @@
-export interface IColumn {
-    name: string;
-    size: number;
-    editable: boolean;
-    content: any[];
+export type TConcept = 'sale' | 'outlay' | 'expense';
+export interface IRow {
+    time: string;
+    amount: number;
+    concept: TConcept;
 }
 
 export interface IDay {
     day: string;
-    sales: number[];
-    outlays: number[];
-    expenses: number[];
+    rows: IRow[];
+    sales: number;
+    outlays: number;
+    expenses: number;
     cash: number;
 }
 
