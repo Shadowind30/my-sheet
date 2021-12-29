@@ -24,3 +24,20 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+@media screen and (max-width: 768px) {
+    ion-modal.mini-modal {
+        &::part(backdrop) {
+            z-index: 1;
+        }
+        &::part(content) {
+            border-radius: 1em 1em 0 0;
+            margin-top: 50vh;
+            z-index: 2;
+            height: 50%;
+        }
+    
+    }
+  
+  }

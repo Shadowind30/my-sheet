@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { getDaysInAMonth, mapConcept } from 'src/app/utils/function.helpers';
 import { IRow } from 'src/app/models/main.interfaces';
+import { ModalController } from '@ionic/angular';
+import { AddRowComponent } from 'src/app/shared/modals/add-row/add-row.component';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +21,7 @@ export class HomePage implements OnInit {
     concept: 'Concepto'
   };
 
-  public columns: IRow[] = [
+  public rows: IRow[] = [
     {
       time: '10:00',
       amount: 100,
@@ -37,13 +39,27 @@ export class HomePage implements OnInit {
     }
   ];
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore, private modal: ModalController) {
   }
 
   ngOnInit() {
     const collectionRef = collection(this.firestore, 'users');
     this.item$ = collectionData(collectionRef);
     console.log(getDaysInAMonth(2, 2020));
+  }
+
+  public async addRow() {
+    const modal = await this.modal.create({
+      component: AddRowComponent,
+      cssClass: 'mini-modal'
+    });
+    await modal.present();
+
+    // this.rows.push({
+    //   time: '10:00',
+    //   amount: 100,
+    //   concept: 'sale'
+    // });
   }
 
 }
