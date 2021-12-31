@@ -1,3 +1,29 @@
-<ion-text color="primary">
-  add-row works!
-</ion-text>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-text class="ion-text-center" color="primary">
+        <h1>Añadir registro</h1>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-input [(ngModel)]="amount" placeholder="Monto"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-col>
+    <ion-label>
+    </ion-label>
+    <ion-select [(ngModel)]="concept" placeholder="Concepto">
+      <ion-select-option value="sale">Venta</ion-select-option>
+      <ion-select-option value="expense">Gasto</ion-select-option>
+      <ion-select-option value="outlay">Desembolso</ion-select-option>
+      <ion-select-option value="other">Otro</ion-select-option>
+    </ion-select>
+  </ion-col>
+  <ion-col>
+    <ion-button [disabled]="!concept || !amount" shape="round" expand="full" (click)="addRow()">
+      Agregar
+    </ion-button>
+  </ion-col>
+</ion-grid>

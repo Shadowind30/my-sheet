@@ -6,25 +6,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header>
-    <ion-toolbar>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-              Martes 28 de Diciembre
-          </ion-col>
-        </ion-row>
-        </ion-grid>
-    </ion-toolbar>
-  </ion-header>
-  <ion-grid>
-    <ion-row class="ion-justify-content-between">
-      <ion-col>Hora</ion-col>
-      <ion-col>Monto</ion-col>
-      <ion-col>Concepto</ion-col> 
-    </ion-row>
-    <ion-row class="ion-justify-content-between" *ngFor="let row of rows">
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            {{today | date:'EEEE, MMMM d, y h:mm:ss a':'-0400':'es-DO' | uppercase}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-between">
+        <ion-col>Hora</ion-col>
+        <ion-col>Monto</ion-col>
+        <ion-col>Concepto</ion-col> 
+      </ion-row>
+      </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="rows.length">
+    <ion-row (click)="options(row)" class="ion-justify-content-between" *ngFor="let row of rows">
       <ion-col>
         <ion-text>
           {{row.time}}
@@ -42,12 +43,15 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-header>
-    <ion-toolbar>
-      <ion-button (click)="addRow()">
-        <ion-icon name="add"></ion-icon>
-        Agregar
-      </ion-button>
-    </ion-toolbar>
-  </ion-header>
+  <ion-title *ngIf="!rows.length">
+    <h1 style="text-align: center; margin-top: 30vh;">No hay registros</h1>
+  </ion-title>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" shape="round" (click)="addRow()">
+      <ion-icon name="add"></ion-icon>
+      Agregar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

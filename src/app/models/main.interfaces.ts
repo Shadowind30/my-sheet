@@ -1,5 +1,6 @@
-export type TConcept = 'sale' | 'outlay' | 'expense';
+export type TConcept = 'sale' | 'outlay' | 'expense' | 'other';
 export interface IRow {
+    id: number;
     time: string;
     amount: number;
     concept: TConcept;

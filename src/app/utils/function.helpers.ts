@@ -1,4 +1,4 @@
-import { TConcept } from "../models/main.interfaces";
+import { TConcept } from '../models/main.interfaces';
 
 /**
  * @description Get total days in a given month of a given year. Will take current month and year if not provided
