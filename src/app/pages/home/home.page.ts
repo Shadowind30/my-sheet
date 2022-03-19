@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { getDaysInAMonth, mapConcept } from 'src/app/utils/function.helpers';
-import { IRow } from 'src/app/models/main.interfaces';
+import { getDaysInAMonth } from 'src/app/utils/function.helpers';
+import { IDay, IMonth } from 'src/app/models/main.interfaces';
 import { ModalController } from '@ionic/angular';
-import { AddRowComponent } from 'src/app/shared/modals/add-row/add-row.component';
 import { AlertsService } from 'src/app/utils/alerts.service';
 import { registerLocaleData } from '@angular/common';
 import localeDR from '@angular/common/locales/es-DO';
@@ -12,72 +11,65 @@ import localeDR from '@angular/common/locales/es-DO';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  public mapConcept = mapConcept;
   public today = null;
   public item$: Observable<any[]>;
-  public header: any = {
-    time: 'Hora',
-    amount: 'Monto',
-    concept: 'Concepto'
+
+  public days: IDay[] = [];
+  public month: IMonth = {
+    month: 'Marzo 2022',
+    days: this.days,
+    totalSales: 0,
+    totalExpenses: 0,
+    totalOutlays: 0,
+    balance: 0,
+    averageSales: 0,
+    highestSales: 0,
+    lowestSales: 0,
   };
 
-  public rows: IRow[] = [
-  ];
+  public padStart = null;
 
-  constructor(private firestore: Firestore, private modal: ModalController, private _alert: AlertsService) {
-  }
+  constructor(
+    private firestore: Firestore,
+    private modal: ModalController,
+    private _alert: AlertsService
+  ) {}
 
   ngOnInit() {
+    this.padStart = String.prototype.padStart;
     registerLocaleData(localeDR, 'es-DO');
     const collectionRef = collection(this.firestore, 'users');
     this.item$ = collectionData(collectionRef);
-    console.log(getDaysInAMonth());
+    const daysThisMonth = getDaysInAMonth();
+    console.log(daysThisMonth);
+
+    for (let i = 1; i <= daysThisMonth; i++) {
+      this.days.push({
+        id: i,
+        day: i,
+        sales: null,
+        expenses: null,
+        outlays: null,
+        cash: 0
+      });
+    }
     this.today = new Date();
   }
 
-  public async addRow() {
-    const modal = await this.modal.create({
-      component: AddRowComponent,
-      cssClass: 'mini-modal',
-      breakpoints: [0, 0.5],
-      initialBreakpoint: 0.5,
-      componentProps: {
-        id: this.rows.length + 1
-      }
-    });
-    await modal.present();
+  public onValueChange(event, field: 'sales'| 'expenses' | 'outlays', index: number) {
+    this.days[index][field] = +event.target.value;
+    this.days[index].cash = this.days[index].sales - this.days[index].expenses - this.days[index].outlays;
 
-    const { data } = await modal.onWillDismiss();
-    if(data && data.data) {
-      this.rows.push(data.data);
-    }
+    this.month.totalSales = this.days.reduce((acc, curr) => acc + curr.sales, 0);
+    this.month.totalExpenses = this.days.reduce((acc, curr) => acc + curr.expenses, 0);
+    this.month.totalOutlays = this.days.reduce((acc, curr) => acc + curr.outlays, 0);
 
+    this.month.balance = this.days.reduce((acc, cur) => acc + cur.cash, 0);
+    this.month.averageSales = this.month.balance / this.days.length;
+    this.month.highestSales = this.days.reduce((acc, cur) => acc > cur.sales ? acc : cur.sales, 0);
+    this.month.lowestSales = this.days.reduce((acc, cur) => acc < cur.sales ? acc : cur.sales, this.days[0].sales);
   }
-
-  public async options(row: IRow) {
-    const alert = await this._alert.simpleAlert(
-      `¿Desea eliminar los ${row.amount} de ${mapConcept(row.concept)}?`,
-      [
-        {
-        text: 'Cancelar',
-        role: 'CANCEL'
-        },
-        {
-        text: 'Eliminar',
-        role: 'DELETE',
-        }
-      ],
-      'Confirmacion',
-    );
-
-    const res = await alert.onDidDismiss();
-    if(res.role === 'DELETE') {
-      this.rows = this.rows.filter(item => item.id !== row.id);
-    }
-  }
-
 }

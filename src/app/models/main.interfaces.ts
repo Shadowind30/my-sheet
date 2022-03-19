@@ -1,40 +1,32 @@
-export type TConcept = 'sale' | 'outlay' | 'expense' | 'other';
-export interface IRow {
-    id: number;
-    time: string;
-    amount: number;
-    concept: TConcept;
-}
-
 export interface IDay {
-    day: string;
-    rows: IRow[];
+    id: number;
+    day: number;
     sales: number;
-    outlays: number;
     expenses: number;
+    outlays: number;
     cash: number;
 }
 
 export interface IMonth {
     month: string;
     days: IDay[];
-    balance: number;
     totalSales: number;
-    totalOutlays: number;
     totalExpenses: number;
-    average: number;
-    highest: number;
-    lowest: number;
+    totalOutlays: number;
+    balance: number;
+    averageSales: number;
+    highestSales: number;
+    lowestSales: number;
 }
 
-export interface IYear {
-    year: string;
-    months: IMonth[];
-    total: number;
-    totalSales: number;
-    totalOutlays: number;
-    totalExpenses: number;
-    average: number;
-    highest: number;
-    lowest: number;
-}
+// export interface IYear {
+//     year: string;
+//     months: IMonth[];
+//     total: number;
+//     totalSales: number;
+//     totalOutlays: number;
+//     totalExpenses: number;
+//     average: number;
+//     highest: number;
+//     lowest: number;
+// }

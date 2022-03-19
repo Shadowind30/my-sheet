@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddRowComponent } from './add-row/add-row.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-const MODALS = [
-  AddRowComponent
-];
+const MODALS = [];
 
 @NgModule({
   declarations: [
