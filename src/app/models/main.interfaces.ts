@@ -1,5 +1,4 @@
 export interface IDay {
-    id: number;
     day: number;
     sales: number;
     expenses: number;
@@ -8,7 +7,8 @@ export interface IDay {
 }
 
 export interface IMonth {
-    month: string;
+    id: number;
+    name: string;
     days: IDay[];
     totalSales: number;
     totalExpenses: number;
