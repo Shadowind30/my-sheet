@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { AlertsService } from 'src/app/utils/alerts.service';
 import { registerLocaleData } from '@angular/common';
 import localeDR from '@angular/common/locales/es-DO';
+import { DummyService } from 'src/app/providers/inner/dummy.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomePage implements OnInit {
 
   public days: IDay[] = [];
   public month: IMonth = {
-    month: 'Marzo 2022',
+    id: 4,
+    name: 'Abril 2022',
     days: this.days,
     totalSales: 0,
     totalExpenses: 0,
@@ -35,7 +37,8 @@ export class HomePage implements OnInit {
   constructor(
     private firestore: Firestore,
     private modal: ModalController,
-    private _alert: AlertsService
+    private _alert: AlertsService,
+    private db: DummyService
   ) {}
 
   ngOnInit() {
@@ -48,7 +51,6 @@ export class HomePage implements OnInit {
 
     for (let i = 1; i <= daysThisMonth; i++) {
       this.days.push({
-        id: i,
         day: i,
         sales: null,
         expenses: null,
@@ -71,5 +73,14 @@ export class HomePage implements OnInit {
     this.month.averageSales = this.month.balance / this.days.length;
     this.month.highestSales = this.days.reduce((acc, cur) => acc > cur.sales ? acc : cur.sales, 0);
     this.month.lowestSales = this.days.reduce((acc, cur) => acc < cur.sales ? acc : cur.sales, this.days[0].sales);
+  }
+
+  public gotoPrevMonth() {
+    this.month = this.db.months.find(m => m.id === this.month.id - 1);
+    this.days = this.month.days;
+  }
+  public gotoNextMonth() {
+    this.month = this.db.months.find(m => m.id === this.month.id + 1);
+    this.days = this.month.days;
   }
 }
