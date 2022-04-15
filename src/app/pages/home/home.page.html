@@ -11,17 +11,20 @@
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="3">
-            <ion-button fill="clear" (click)="gotoPrevMonth()">
+            <ion-button fill="clear" [disabled]="this.month.id === 1" (click)="gotoPrevMonth()">
               <ion-icon name="chevron-back"></ion-icon>
             </ion-button>
         </ion-col>
-        <ion-col size="6">
-          <ion-title>
-            {{month.name}}
-          </ion-title>
+        <ion-col (click)="showMonthInfo()" size="6" class="ion-activatable ripple-parent">
+          <div class="month-title">
+            <ion-title>
+              {{month?.name}}
+            </ion-title>
+          </div>
+          <ion-ripple-effect></ion-ripple-effect>
         </ion-col>
         <ion-col size="3">
-            <ion-button fill="clear" (click)="gotoNextMonth()">
+            <ion-button [disabled]="month.id === this.db.totalMonths" fill="clear" (click)="gotoNextMonth()">
               <ion-icon name="chevron-forward"></ion-icon>
             </ion-button>
         </ion-col>
@@ -39,8 +42,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid *ngIf="days?.length">
-    <ion-row class="ion-align-items-center" *ngFor="let day of days; index as i">
+  <ion-grid *ngIf="month.days?.length">
+    <ion-row class="ion-align-items-center" *ngFor="let day of month?.days; index as i">
       <!-- <ion-col size="2.5">
         <ion-button>
           <ion-icon [name]="day?.sign"></ion-icon>
@@ -54,18 +57,18 @@
         </ion-item>
       </ion-col>
       <ion-col>
-        <ion-input placeholder="vacio" inputmode="numeric" (ionChange)="onValueChange($event, 'sales', i)" [value]="day.sales"></ion-input>
+        <ion-input placeholder="vacio" inputmode="numeric" (ionChange)="onValueChange($event, 'sales', i)" [value]="day?.sales"></ion-input>
       </ion-col>
       <ion-col>
-        <ion-input placeholder="vacio" inputmode="numeric" (ionChange)="onValueChange($event, 'expenses', i)" [value]="day.expenses"></ion-input>
+        <ion-input placeholder="vacio" inputmode="numeric" (ionChange)="onValueChange($event, 'expenses', i)" [value]="day?.expenses"></ion-input>
       </ion-col>
       <ion-col>
-        <ion-input placeholder="vacio" inputmode="numeric" (ionChange)="onValueChange($event, 'outlays', i)" [value]="day.outlays"></ion-input>
+        <ion-input placeholder="vacio" inputmode="numeric" (ionChange)="onValueChange($event, 'outlays', i)" [value]="day?.outlays"></ion-input>
       </ion-col>
       <ion-col>
         <ion-item lines="none">
           <ion-text class="ion-text-center">
-            {{day.cash}}
+            {{day?.cash}}
           </ion-text>
         </ion-item>
       </ion-col>
@@ -76,10 +79,10 @@
   <ion-toolbar>
       <ion-row>
         <ion-col size="2">Total</ion-col>
-        <ion-col>{{month.totalSales}}</ion-col>
-        <ion-col>{{month.totalExpenses}}</ion-col>
-        <ion-col>{{month.totalOutlays}}</ion-col>
-        <ion-col>{{month.balance}}</ion-col>
+        <ion-col>{{monthInfo?.totalSales}}</ion-col>
+        <ion-col>{{monthInfo?.totalExpenses}}</ion-col>
+        <ion-col>{{monthInfo?.totalOutlays}}</ion-col>
+        <ion-col>{{monthInfo?.balance}}</ion-col>
       </ion-row>
   </ion-toolbar>
 </ion-footer>
