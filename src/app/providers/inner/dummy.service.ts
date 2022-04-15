@@ -88,13 +88,6 @@ export class DummyService {
           cash: 200,
         },
         {
-          day: 11,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
           day: 12,
           sales: 500,
           expenses: 200,
@@ -117,20 +110,6 @@ export class DummyService {
         },
         {
           day: 15,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
-          day: 1,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
-          day: 1,
           sales: 500,
           expenses: 200,
           outlays: 100,
@@ -248,14 +227,7 @@ export class DummyService {
           outlays: 100,
           cash: 200,
         },
-      ],
-      totalSales: 15500,
-      totalExpenses: 6200,
-      totalOutlays: 3100,
-      balance: 6200,
-      averageSales: 500,
-      highestSales: 500,
-      lowestSales: 500,
+      ]
     },
     {
       id: 2,
@@ -339,13 +311,6 @@ export class DummyService {
           cash: 200,
         },
         {
-          day: 11,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
           day: 12,
           sales: 500,
           expenses: 200,
@@ -368,20 +333,6 @@ export class DummyService {
         },
         {
           day: 15,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
-          day: 1,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
-          day: 1,
           sales: 500,
           expenses: 200,
           outlays: 100,
@@ -479,13 +430,6 @@ export class DummyService {
           cash: 200,
         },
       ],
-      totalSales: 14000,
-      totalExpenses: 5600,
-      totalOutlays: 2800,
-      balance: 5600,
-      averageSales: 500,
-      highestSales: 500,
-      lowestSales: 500,
     },
     {
       id: 3,
@@ -569,13 +513,6 @@ export class DummyService {
           cash: 200,
         },
         {
-          day: 11,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
           day: 12,
           sales: 500,
           expenses: 200,
@@ -598,20 +535,6 @@ export class DummyService {
         },
         {
           day: 15,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
-          day: 1,
-          sales: 500,
-          expenses: 200,
-          outlays: 100,
-          cash: 200,
-        },
-        {
-          day: 1,
           sales: 500,
           expenses: 200,
           outlays: 100,
@@ -730,14 +653,12 @@ export class DummyService {
           cash: 200,
         },
       ],
-      totalSales: 15500,
-      totalExpenses: 6200,
-      totalOutlays: 3100,
-      balance: 6200,
-      averageSales: 500,
-      highestSales: 500,
-      lowestSales: 500,
     },
   ];
+
   constructor() {}
+
+  public get totalMonths() {
+    return this.months.length;
+  }
 }
